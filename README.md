@@ -13,5 +13,7 @@ I have been writing a lot of these rules lately and I use neovim (btw), so I wan
 ## To do 
 - Supposed to allow for code completion
 - Supposed to allow for snippets too
+- Since I'm doing this for Neovim, I won't write a client, I'll just connect to it using lua.
+- Extend telescope to show backend conversion to various backends like elasticsearch
 
 Let's do this
