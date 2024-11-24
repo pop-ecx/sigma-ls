@@ -1,6 +1,7 @@
 ## Sigma LS
 
 ![Sigma](sigma.jpeg)
+
 This is not based on the popular sigma memes you see around. It is instead intended as a language server for sigma rules.
 
 Sigma rules are yaml files that contain info to detect malicious behavior when suspecting log files in various SIEMs.
