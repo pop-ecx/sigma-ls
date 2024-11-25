@@ -18,3 +18,16 @@ I have been writing a lot of these rules lately and I use neovim (btw), so I wan
 
 We are using pygls 
 Let's do this
+
+To connect to the LSP in Neovim add this to your init.lua file
+```lua
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'yaml',
+  callback = function (args)
+    vim.lsp.start({
+      name = 'Bateman',
+      cmd = {"/home/m3lk0r/pygls/bin/python3.11", "/home/m3lk0r/Desktop/sigma-ls/main.py"},
+    })
+  end,
+})
+```
