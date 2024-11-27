@@ -49,18 +49,38 @@ def validate_sigma(content: str):
 def publish_diagnostics(server, uri, content):
     diagnostics = []
 
-    # Example logic to add a diagnostic
-    if "Invalid" in content:
+    try:
+        # Parse the YAML content
+        rule = yaml.safe_load(content)
+
+        # Check if required fields are missing
+        required_fields = ["detection", "logsource", "Title"]
+        for field in required_fields:
+            if field not in rule:
+                diagnostics.append(
+                    Diagnostic(
+                        range=Range(
+                            start=Position(line=0, character=0),
+                            end=Position(line=0, character=1),
+                        ),
+                        message=f"Missing required field: '{field}'.",
+                        severity=DiagnosticSeverity.Error,
+                    )
+                )
+
+    except yaml.YAMLError as e:
+        # Handle YAML parsing errors
         diagnostics.append(
             Diagnostic(
                 range=Range(
                     start=Position(line=0, character=0),
-                    end=Position(line=0, character=len(content)),
+                    end=Position(line=0, character=1),
                 ),
-                message="Detected 'Invalid' in the content.",
-                severity=DiagnosticSeverity.Warning,  # Warning or Error level
+                message=f"YAML parsing error: {str(e)}",
+                severity=DiagnosticSeverity.Error,
             )
         )
 
-    # Use server.publish_diagnostics to send diagnostics to the client
+    # Publish diagnostics to the client
     server.publish_diagnostics(uri, diagnostics)
+
