@@ -55,6 +55,32 @@ def register_completion_feature(server):
                 detail="Say what the rule is designed for",
                 insert_text="description: ",
             ),
+            CompletionItem(
+                label="displaymessage",
+                kind=CompletionItemKind.Keyword,
+                detail="verbose message when rule triggers",
+                insert_text="displaymessage: ",
+            ),
+            CompletionItem(
+                label="service",
+                kind=CompletionItemKind.Keyword,
+                detail="service",
+                insert_text="service: ",
+            ),
+            CompletionItem(
+                label="level",
+                kind=CompletionItemKind.Keyword,
+                detail="Severity level",
+                insert_text="level: ",
+            ),
+            CompletionItem(
+                label="falsepositives",
+                kind=CompletionItemKind.Keyword,
+                detail="known falsepositives",
+                insert_text="falsepositives: ",
+            ),
+
+
 
         ]
 
