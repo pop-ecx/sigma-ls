@@ -1,3 +1,4 @@
+import ruamel.yaml
 from ruamel.yaml import YAML
 from ruamel.yaml.compat import StringIO
 from jsonschema import validate, ValidationError
@@ -13,8 +14,8 @@ SIGMA_SCHEMA = {
             "properties": {
                 "category": {"type": "string"},
                 "product": {"type": "string"},
+                "service": {"type": "string"},
             },
-            "required": ["category"],
         },
         "detection": {"type": "object"},
     },
@@ -26,21 +27,21 @@ yaml = YAML()
 def extract_key_line_mapping(content):
     """Map keys to their line numbers in the YAML document."""
     key_lines = {}
-    stream = StringIO(content)
-    yaml_obj = yaml.compose(stream)  # Parses without loading into Python structures
+    yaml = YAML()
+    yaml_obj = yaml.compose(content)  # Parse yaml into a node structure
 
     def traverse(node):
         """Recursively traverse the YAML node."""
-        if hasattr(node, "value"):  # Only process nodes with values
-            if isinstance(node.value, list):  # Handle mappings
-                for pair in node.value:
-                    if len(pair) == 2:  # Ensure it's a key-value pair
-                        key, value = pair
-                        if hasattr(key, "start_mark"):
-                            key_lines[key.value] = key.start_mark.line
-                        traverse(value)
-            elif isinstance(node.value, str):  # Handle scalar strings
-                pass  # Scalars don’t need traversal
+        if isinstance(node, ruamel.yaml.nodes.MappingNode):  # Process mappings
+            for key_node, value_node in node.value:
+                if isinstance(key_node, ruamel.yaml.nodes.ScalarNode):  # Key must be a scalar
+                    key_lines[key_node.value] = key_node.start_mark.line
+                traverse(value_node)  # Recursively process the value node
+        elif isinstance(node, ruamel.yaml.nodes.SequenceNode):  # Process sequences (lists)
+            for item in node.value:
+                traverse(item)
+        elif isinstance(node, ruamel.yaml.nodes.ScalarNode):  # Scalars (values) don't need traversal duh
+            pass
 
     if yaml_obj:
         traverse(yaml_obj)
@@ -74,7 +75,7 @@ def validate_sigma(content: str):
         # Validate recommended fields
         recommended_fields = ["id", "status", "description", "author"]
         for field in recommended_fields:
-            line = key_lines.get(field, 0)  # Default to line 0 if line is unknown
+            line = key_lines.get(field, 0)  # Default to line 0 if line is unknown gave me headaches
             if field not in rule:
                 diagnostics.append(
                     Diagnostic(
