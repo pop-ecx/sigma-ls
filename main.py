@@ -2,6 +2,8 @@ from lsp_server.server import SigmaLanguageServer
 from features.initialize import initialize
 from features.diagnostics import publish_diagnostics
 from lsprotocol.types import DidChangeTextDocumentParams, TEXT_DOCUMENT_DID_OPEN, TEXT_DOCUMENT_DID_SAVE, TEXT_DOCUMENT_DID_CHANGE, DidOpenTextDocumentParams, DidSaveTextDocumentParams
+from features.completions import register_completion_feature
+
 # Create the server instance
 server = SigmaLanguageServer()
 
@@ -23,5 +25,6 @@ def did_change(params: DidChangeTextDocumentParams):
     content = server.workspace.get_document(uri).source
     publish_diagnostics(server, uri, content)
 
+register_completion_feature(server)
 if __name__ == "__main__":
     server.start_io()
