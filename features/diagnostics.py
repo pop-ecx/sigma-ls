@@ -54,7 +54,7 @@ def publish_diagnostics(server, uri, content):
         rule = yaml.safe_load(content)
 
         # Check if required fields are missing
-        required_fields = ["detection", "logsource", "Title"]
+        required_fields = ["detection", "logsource", "title"]
         for field in required_fields:
             if field not in rule:
                 diagnostics.append(
