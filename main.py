@@ -16,13 +16,13 @@ def on_initialize(params):
 @server.feature(TEXT_DOCUMENT_DID_OPEN)
 def did_open(params: DidOpenTextDocumentParams):  
     uri = params.text_document.uri
-    content = server.workspace.get_document(uri).source  # Access server instance directly
+    content = server.workspace.get_text_document(uri).source  # Access server instance directly
     publish_diagnostics(server, uri, content)
 
 @server.feature(TEXT_DOCUMENT_DID_CHANGE)
 def did_change(params: DidChangeTextDocumentParams):
     uri = params.text_document.uri
-    content = server.workspace.get_document(uri).source
+    content = server.workspace.get_text_document(uri).source
     publish_diagnostics(server, uri, content)
 
 register_completion_feature(server)
