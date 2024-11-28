@@ -31,6 +31,31 @@ def register_completion_feature(server):
                 detail="Define the condition for detection",
                 insert_text="condition: ",
             ),
+            CompletionItem(
+                label="author",
+                kind=CompletionItemKind.Keyword,
+                detail="Define the author",
+                insert_text="author: ",
+            ),
+            CompletionItem(
+                label="id",
+                kind=CompletionItemKind.Keyword,
+                detail="give the rule an id",
+                insert_text="id: ",
+            ),
+            CompletionItem(
+                label="status",
+                kind=CompletionItemKind.Keyword,
+                detail="Give it a unique identifier",
+                insert_text="status: ",
+            ),
+            CompletionItem(
+                label="description",
+                kind=CompletionItemKind.Keyword,
+                detail="Say what the rule is designed for",
+                insert_text="description: ",
+            ),
+
         ]
 
         return completions
