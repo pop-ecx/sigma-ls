@@ -40,7 +40,7 @@ end
 M.sigma_picker = function(opts)
     opts = opts or {}
 
-    -- Backends for Sigma Rules
+    -- supported backends for Sigma Rules
     local sigma_rules = {
         elasticsearch = { "config1.yml", "config2.yml" },
         kibana = { "ecs-auditbeat-modules-enabled", "ecs-auditd","ecs-cloudtrail","ecs-dns","ecs-filebeat","ecs-okta","ecs-proxy","ecs-suricata","ecs-zeek-corelight","ecs-zeek-elastic-beats-implementation","elk-defaultindex","elk-defaultindex-filebeat","elk-defaultindex-logstash","elk-linux","elk-windows","elk-winlogbeat","elk-winlogbeat-sp","filebeat-defaultindex","helk","logstash-defaultindex","logstash-linux","logstash-windows","logstash-zeek-default-json","powershell","sysmon","windows-audit","windows-services","winlogbeat","winlogbeat-modules-enabled", "winlogbeat-old" },
@@ -48,7 +48,7 @@ M.sigma_picker = function(opts)
         crowdstrike = { "crowdstrike","elk-defaultindex", "elk-defaultindex-filebeat", "elk-defaultindex-logstash", "elk-linux", "elk-windows", "elk-winlogbeat", "elk-winlogbeat-sp", "powershell", "sysmon", "windows-audit", "windows-services" },
     }
 
-    -- Step 2: Picker for configurations
+    -- Picker for configurations
     local function pick_config(selected_backend)
         local configs = sigma_rules[selected_backend]
 
@@ -76,7 +76,7 @@ M.sigma_picker = function(opts)
                         "sigmac -t " ..
                         selected_backend .. " -c " .. selected_config .. " " .. current_file
 
-                    -- Execute the backend converter script
+                    -- Execute the backend converter
                     vim.fn.jobstart(command, {
                         stdout_buffered = true,
                         on_stdout = function(_, data)
@@ -107,7 +107,7 @@ M.sigma_picker = function(opts)
         }):find()
     end
 
-    -- Step 1: Picker for backends
+   -- Picker for backends
     pickers.new(opts, {
         prompt_title = "Sigma Rules Backend Picker",
         finder = finders.new_table({
