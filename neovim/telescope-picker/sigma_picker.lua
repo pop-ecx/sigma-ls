@@ -1,6 +1,6 @@
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
-local previewers = require("telescope.previewers")
+--local previewers = require("telescope.previewers")
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
@@ -24,13 +24,13 @@ M.sigma_picker = function(opts)
             results = sigma_rules,
         }),
         sorter = conf.generic_sorter(opts),
-        previewer = previewers.new_buffer_previewer({
-            define_preview = function(self, entry, status)
-                local rule = entry.value
-                self.state.bufnr = vim.api.nvim_create_buf(false, true)
-                vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { "Preview for: " .. rule })
-            end,
-        }),
+        --previewer = previewers.new_buffer_previewer({
+        --    define_preview = function(self, entry, status)
+        --        local rule = entry.value
+        --        self.state.bufnr = vim.api.nvim_create_buf(false, true)
+        --        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, { "Preview for: " .. rule })
+        --    end,
+        --}),
         attach_mappings = function(prompt_bufnr, map)
             actions.select_default:replace(function()
                 local selection = action_state.get_selected_entry()
@@ -64,9 +64,7 @@ M.sigma_picker = function(opts)
     }):find()
 end
 
-M.sigma_picker()
 return M
-
 -- Trying to add it as a telescope extension is a pain. Still working on it
 -- Export the picker as a Telescope extension
 --return require("telescope").register_extension({
