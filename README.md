@@ -8,22 +8,13 @@ Sigma rules are yaml files that contain info to detect malicious behavior when s
 
 I have been writing a lot of these rules lately and I use neovim (btw), so I wanted to make it easy for myself. It may be useful to y'all.
 
-The LS provides features such as diagnostics and completion. It also has a little extension for compiling with sigmac and get results from within neovim itself.
-No need to leave your beloved editor.
+The LS provides features such as diagnostics and completion. I've also created a little plugin for compiling with sigmac from within neovim itself.
+No need to leave your beloved editor when writing sigma rules. You can get the conversion plugin [here](https://github.com/pop-ecx/sigma_picker.nvim) 
 
 
 ## How it feels
 Real time diagnostics is provided as you write your sigma rules
 ![diagnostics](sigma-ls.png)
-
-Once you are comfortable with your rule, call the backend picker and choose
-![choose backend](pick-backend.png)
-
-Now choose the preferred config
-![choose config](pick-config.png)
-
-Your rule should be compiled and you'll get a result like this:
-![generated rule](result.png)
 
 
 ## Installation instructions
@@ -40,4 +31,3 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 ```
 
-> This is still experimental. For now only four backends are supported. 
