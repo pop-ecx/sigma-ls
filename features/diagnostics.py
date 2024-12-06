@@ -75,7 +75,7 @@ def validate_sigma(content: str):
         # Validate recommended fields
         recommended_fields = ["id", "status", "description", "author"]
         for field in recommended_fields:
-            line = key_lines.get(field, 0)  # Default to line 0 if line is unknown gave me headaches
+            line = key_lines.get(field, 0)  # Default to line 0 if line is unknown
             if field not in rule:
                 diagnostics.append(
                     Diagnostic(
@@ -95,6 +95,26 @@ def validate_sigma(content: str):
                             end=Position(line=line, character=len(field)),
                         ),
                         message=f"Field '{field}' must be a non-empty string.",
+                        severity=DiagnosticSeverity.Warning,
+                    )
+                )
+
+        # Custom validation for logsource with product or service as okta
+        if "logsource" in rule:
+            logsource = rule["logsource"]
+            if (
+                isinstance(logsource, dict)
+                and logsource.get("product") == "okta"
+                or logsource.get("service") == "okta"
+            ):
+                logsource_line = key_lines.get("logsource", 0)
+                diagnostics.append(
+                    Diagnostic(
+                        range=Range(
+                            start=Position(line=logsource_line, character=0),
+                            end=Position(line=logsource_line, character=len("logsource")),
+                        ),
+                        message="Lacework backend does not support logsource 'okta'.",
                         severity=DiagnosticSeverity.Warning,
                     )
                 )
