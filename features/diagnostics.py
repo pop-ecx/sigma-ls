@@ -99,6 +99,22 @@ def validate_sigma(content: str):
                     )
                 )
 
+        # Hawk is bitchy if date is not wrapped
+        if "date" in rule:
+            date_value = rule["date"]
+            date_line = key_lines.get("date", 0)
+            if not (isinstance(date_value, str) and date_value.startswith('"') and date_value.endswith('"')):
+                diagnostics.append(
+                        Diagnostic(
+                            range=Range(
+                                start=Position(line=date_line, character=0),
+                                end=Position(line=date_line, character=len("date")),
+                            ),
+                            message="Ensure the 'date' field is enclosed in quotation marks if planning to use the Hawk backend",
+                            severity=DiagnosticSeverity.Hint,
+                        )
+                    )
+
         # Custom validation for logsource with product or service as okta
         if "logsource" in rule:
             logsource = rule["logsource"]
