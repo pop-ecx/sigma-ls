@@ -31,3 +31,4 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 ```
 
+> :warning: This is still WIP.
