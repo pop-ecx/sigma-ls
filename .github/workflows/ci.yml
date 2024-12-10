@@ -22,7 +22,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            pip install pylint pygls lsprotocol ruamel.yaml
+            pip install pylint pygls lsprotocol ruamel.yaml jsonschema
 
         - name: Run
           run: |
