@@ -1,3 +1,6 @@
+"""
+Completions feature
+"""
 from lsprotocol.types import (
     TEXT_DOCUMENT_COMPLETION,
     CompletionItem,
@@ -7,7 +10,7 @@ from lsprotocol.types import (
 )
 
 def register_completion_feature(server):
-    # Register the completion feature with the LSP server.
+    """Register the completion feature with the LSP server"""
 
     @server.feature(TEXT_DOCUMENT_COMPLETION)
     def completion(params: CompletionParams):
@@ -91,4 +94,3 @@ def register_completion_feature(server):
         ]
 
         return completions
-
