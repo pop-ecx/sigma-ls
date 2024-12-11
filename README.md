@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function (args)
     vim.lsp.start({
       name = 'Sigma_ls',
-      cmd = {"/home/m3lk0r/pygls/bin/python3.11", "/home/m3lk0r/Desktop/sigma-ls/main.py"},
+      cmd = {"<poetry env info path>/bin/python", "/home/m3lk0r/Desktop/sigma-ls/main.py"},
     })
   end,
 })
