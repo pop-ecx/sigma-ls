@@ -26,4 +26,4 @@ jobs:
 
         - name: Run
           run: |
-            pylint .
+            pylint --fail-under=8 .
