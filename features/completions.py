@@ -91,6 +91,14 @@ def register_completion_feature(server):
                 insert_text="level: ${1:low|medium|high|critical}",
                 insert_text_format=InsertTextFormat.Snippet,
             ),
+            CompletionItem(
+                label="CommandLine|contains",
+                kind=CompletionItemKind.Keyword,
+                detail="Define what commandline contains in your selection",
+                insert_text="CommandLine|contains:\n  - ${1:bash -c}\n  - ${2:iex}",
+                insert_text_format=InsertTextFormat.Snippet,
+            ),
+            
         ]
 
         return completions
