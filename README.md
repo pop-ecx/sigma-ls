@@ -30,5 +30,11 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 ```
+## Install in dev mode
+run
+
+```bash
+poetry install
+```
 
 > :warning: This is still WIP.
