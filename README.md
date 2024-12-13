@@ -1,4 +1,4 @@
-## Sigma LS
+## Sigma Language Server
 
 ![Sigma](sigma.jpeg)
 
