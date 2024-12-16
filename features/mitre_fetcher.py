@@ -14,7 +14,6 @@ def load_mitre_attack_data():
     with open(mitre_file_path, "r") as f:
         return json.load(f)
 
-#@server.feature("sigma/searchMitre")
 def search_mitre(params):
     """
     Handle a custom request to search for MITRE ATT&CK tags by keyword.
@@ -46,5 +45,4 @@ def search_mitre(params):
 
     if matching_entries:
         return {"matches": matching_entries}
-    else:
-        return {"error": f"No matches found for keyword: {keyword}"}
+    return {"error": f"No matches found for keyword: {keyword}"}
