@@ -1,6 +1,6 @@
 ## Sigma Language Server
 
-![Sigma](sigma.jpeg)
+[Sigma](https://sigmahq.io/docs/guide/getting-started.html)
 
 A small Language server to assist in writing sigma rules.
 
