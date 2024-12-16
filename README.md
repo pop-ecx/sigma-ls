@@ -1,6 +1,6 @@
 ## Sigma Language Server
 
-![Sigma](sigma.jpeg)
+[Sigma](https://sigmahq.io/docs/guide/getting-started.html)
 
 A small Language server to assist in writing sigma rules.
 
@@ -29,6 +29,40 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+```
+
+## Extra capability
+It is now possible to search for tags by simply typing
+```lua
+SearchMitre <keyword>
+```
+
+To get this capability simply add this to your init.lua:
+```lua
+vim.api.nvim_create_user_command("SearchMitre", function(opts)
+    local keyword = opts.args
+    vim.lsp.buf_request(0, "sigma/searchMitre", { keyword = keyword }, function(err, result)
+        if err then
+            vim.notify("Error: " .. err.message, vim.log.levels.ERROR)
+        elseif type(result) ~= "table" then
+            vim.notify("Unexpected response format from LSP server.", vim.log.levels.ERROR)
+        elseif result.error then
+            vim.notify("Error: " .. result.error, vim.log.levels.WARN)
+        elseif result.matches then
+            if #result.matches > 0 then
+                local formatted_results = {}
+                for _, match in ipairs(result.matches) do
+                    table.insert(formatted_results, match.tag .. ": " .. match.description)
+                end
+                vim.notify("MITRE ATT&CK Matches:\n" .. table.concat(formatted_results, "\n"), vim.log.levels.INFO)
+            else
+                vim.notify("No matches found.", vim.log.levels.WARN)
+            end
+        else
+            vim.notify("Unexpected result structure from LSP server.", vim.log.levels.ERROR)
+        end
+    end)
+end, { nargs = 1 })
 ```
 ## Install in dev mode
 run

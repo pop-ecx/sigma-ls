@@ -10,6 +10,7 @@ from lsp_server.server import SigmaLanguageServer
 from features.initialize import initialize
 from features.diagnostics import publish_diagnostics
 from features.completions import register_completion_feature
+from features.mitre_fetcher import search_mitre 
 
 # Create the server instance
 server = SigmaLanguageServer()
@@ -34,6 +35,13 @@ def did_change(params: DidChangeTextDocumentParams):
     uri = params.text_document.uri
     content = server.workspace.get_text_document(uri).source
     publish_diagnostics(server, uri, content)
+
+@server.feature("sigma/searchMitre")
+def handle_mitre_search(params):
+    """
+    search mitre tags locally
+    """
+    return search_mitre(params)
 
 register_completion_feature(server)
 if __name__ == "__main__":
