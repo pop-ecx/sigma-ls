@@ -33,6 +33,9 @@ vim.api.nvim_create_autocmd('FileType', {
 
 ## Extra capability
 It is now possible to search for tags by simply typing
+
+![search for tags](mitre.gif)
+
 ```lua
 SearchMitre <keyword>
 ```
