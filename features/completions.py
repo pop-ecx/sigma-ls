@@ -105,6 +105,13 @@ def register_completion_feature(server):
                 insert_text="tags:\n  - ${1:attack.t1012}\n  - ${2:cve.2023-27997}",
                 insert_text_format=InsertTextFormat.Snippet,
             ),
+            CompletionItem(
+                label="EventID",
+                kind=CompletionItemKind.Keyword,
+                detail="OS event ID",
+                insert_text="tags:\n  - ${1:5001}\n  - ${2:4672}",
+                insert_text_format=InsertTextFormat.Snippet,
+            ),
         ]
 
         return completions
