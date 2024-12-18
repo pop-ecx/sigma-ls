@@ -18,7 +18,10 @@ Real time diagnostics is provided as you write your sigma rules
 
 
 ## Installation instructions
-To connect to the LSP in Neovim add this to your init.lua file
+- Git clone the repo
+- cd into the repo
+- run poetry install
+- Connect to the LSP in Neovim by adding this to your init.lua file
 ```lua
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'yaml',
@@ -30,6 +33,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 ```
+> Ensure you have poetry in your system
 
 ## Extra capability
 It is now possible to search for tags by simply typing
