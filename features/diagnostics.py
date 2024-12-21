@@ -99,6 +99,21 @@ def validate_sigma(content: str):
                     )
                 )
 
+        if "title" in rule:
+            title = rule["title"]
+            title_line = key_lines.get("title", 0)
+            if len(title) > 50: 
+                diagnostics.append(
+                    Diagnostic(
+                        range=Range(
+                            start=Position(line=title_line, character=0),
+                            end=Position(line=title_line, character=len("title")),
+                        ),
+                        message="The title is too long. Consider shortening it to improve readability.",
+                        severity=DiagnosticSeverity.Hint,
+                    )
+                )
+        
         # Hawk is bitchy if date is not wrapped
         if "date" in rule:
             date_value = rule["date"]
