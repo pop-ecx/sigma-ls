@@ -71,11 +71,16 @@ vim.api.nvim_create_user_command("SearchMitre", function(opts)
     end)
 end, { nargs = 1 })
 ```
+
+## Hover capability
+Hover over MITRE tags to get more info. You can set a keymap like so
+
+```lua
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+```
 ## Install in dev mode
 run
 
 ```bash
 poetry install
 ```
-
-> :warning: This is still WIP.
