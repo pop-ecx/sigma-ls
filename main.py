@@ -12,7 +12,7 @@ from lsp_server.server import SigmaLanguageServer
 from features.initialize import initialize
 from features.diagnostics import publish_diagnostics
 from features.completions import register_completion_feature
-from features.mitre_fetcher import search_mitre 
+from features.mitre_fetcher import search_mitre
 from features.hover import handle_hover
 
 # Create the server instance

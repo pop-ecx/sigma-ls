@@ -1,11 +1,14 @@
 """
 get hover information for a given word
 """
-from lsprotocol.types import Hover, TextDocumentPositionParams
 import json
 import os
+from lsprotocol.types import Hover, TextDocumentPositionParams
 
 def load_mitre_attack_data():
+    """
+    Load MITRE ATT&CK data from JSON file.
+    """
     file_path = os.path.join(os.path.dirname(__file__), "mitre_attack.json")
     with open(file_path, "r") as f:
         return json.load(f)
