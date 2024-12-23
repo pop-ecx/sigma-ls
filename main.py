@@ -5,12 +5,15 @@ Handles initialization, document change, and diagnostic features.
 from lsprotocol.types import (DidChangeTextDocumentParams,
     TEXT_DOCUMENT_DID_OPEN,
     TEXT_DOCUMENT_DID_CHANGE,
+    Hover,
+    HoverParams,
     DidOpenTextDocumentParams)
 from lsp_server.server import SigmaLanguageServer
 from features.initialize import initialize
 from features.diagnostics import publish_diagnostics
 from features.completions import register_completion_feature
 from features.mitre_fetcher import search_mitre 
+from features.hover import handle_hover
 
 # Create the server instance
 server = SigmaLanguageServer()
@@ -43,6 +46,14 @@ def handle_mitre_search(params):
     """
     return search_mitre(params)
 
+@server.feature("textDocument/hover")
+def hover_feature(server: SigmaLanguageServer, params: HoverParams) -> Hover:
+    """
+    Handle hover request
+    """
+    return handle_hover(server, params)
+
 register_completion_feature(server)
+
 if __name__ == "__main__":
     server.start_io()
