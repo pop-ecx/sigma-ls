@@ -16,3 +16,6 @@ Here are the supported features:
 ## Autocompletions
 - Autocompletes various fields
 - Describes fields 
+
+## Hover
+- Hover information is provided when a user hovers over MITRE tags
