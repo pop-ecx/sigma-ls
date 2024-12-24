@@ -1,10 +1,10 @@
 """
 Initialize deeznuts
 """
-from lsprotocol.types import InitializeParams, InitializeResult
+from lsprotocol.types import InitializeParams, InitializeResult, TextDocumentSyncKind
 
 #@server.feature("initialize")
-def initialize(params: InitializeParams) -> InitializeResult:
+def initialize(server, params: InitializeParams) -> InitializeResult:
     """Initparams that returns initresults"""
     capabilities = {
         "textDocumentSync": TextDocumentSyncKind.Full,
