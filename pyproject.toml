@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sigma-ls"
-version = "0.3.2"
+version = "0.4.1"
 description = "language server for sigma rules"
 authors = ["pop-ecx <oliver.mulwa@protonmail.com>"]
 license = "Apache 2.0"
