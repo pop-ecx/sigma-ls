@@ -22,7 +22,7 @@ server = SigmaLanguageServer()
 @server.feature("initialize")
 def on_initialize(params):
     """Handle initialize request"""
-    return initialize(server, params)
+    return initialize(params)
 
 # Handle file opening
 @server.feature(TEXT_DOCUMENT_DID_OPEN)
