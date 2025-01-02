@@ -1,6 +1,7 @@
 """
 Diagnostics feature 
 """
+import uuid
 import ruamel.yaml
 from ruamel.yaml import YAML
 from jsonschema import validate, ValidationError
@@ -48,6 +49,14 @@ def extract_key_line_mapping(content):
         traverse(yaml_obj)
 
     return key_lines
+
+def is_valid_uuid(value: str) -> bool:
+    """Check if a string is a valid UUID."""
+    try:
+        uuid.UUID(value)
+        return True
+    except ValueError:
+        return False
 
 def validate_sigma(content: str):
     """Validate a Sigma rule's YAML content line by line."""
@@ -98,7 +107,20 @@ def validate_sigma(content: str):
                         severity=DiagnosticSeverity.Warning,
                     )
                 )
-
+        if "id" in rule:
+            id_value = rule["id"]
+            id_line = key_lines.get("id", 0)
+            if not is_valid_uuid(id_value):
+                diagnostics.append(
+                    Diagnostic(
+                        range=Range(
+                            start=Position(line=id_line, character=0),
+                            end=Position(line=id_line, character=len("id")),
+                        ),
+                        message="The 'id' field must be a valid UUID.",
+                        severity=DiagnosticSeverity.Warning,
+                    )
+                )
         if "title" in rule:
             title = rule["title"]
             title_line = key_lines.get("title", 0)
