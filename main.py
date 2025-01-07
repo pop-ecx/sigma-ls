@@ -5,15 +5,19 @@ Handles initialization, document change, and diagnostic features.
 from lsprotocol.types import (DidChangeTextDocumentParams,
     TEXT_DOCUMENT_DID_OPEN,
     TEXT_DOCUMENT_DID_CHANGE,
+    TEXT_DOCUMENT_CODE_ACTION,
     Hover,
     HoverParams,
-    DidOpenTextDocumentParams)
+    DidOpenTextDocumentParams,
+    CodeActionParams
+)
 from lsp_server.server import SigmaLanguageServer
 from features.initialize import initialize
 from features.diagnostics import publish_diagnostics
 from features.completions import register_completion_feature
 from features.mitre_fetcher import search_mitre
 from features.hover import handle_hover
+from features.codeActions import provide_code_actions
 
 # Create the server instance
 server = SigmaLanguageServer()
@@ -38,6 +42,11 @@ def did_change(params: DidChangeTextDocumentParams):
     uri = params.text_document.uri
     content = server.workspace.get_text_document(uri).source
     publish_diagnostics(server, uri, content)
+
+@server.feature("textDocument/codeAction")
+def code_action(params: CodeActionParams):
+    """Provide code actions based on diagnostics"""
+    return provide_code_actions(server, params)
 
 @server.feature("sigma/searchMitre")
 def handle_mitre_search(params):
