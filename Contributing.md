@@ -17,7 +17,7 @@ I appreciate your interest in contributing to the Sigma Rules LSP! 🚀 Below ar
   cd sigma-rules-lsp```
 
 ## 3. Install the project
-- Follow the installation instructions in install.md.
+- Follow the installation instructions in readme.md.
 
 ## 4. Checkout a new branch
 - git checkout -b feature/your-feature-name
@@ -30,7 +30,7 @@ I appreciate your interest in contributing to the Sigma Rules LSP! 🚀 Below ar
 
 ## 6. Test your changes
 - Write tests for any new functionality.
- Run `poetry run pytest` to ensure no new functionality breaks existing features.
+ Run `poetry run python3 run_tests.py` to ensure no new functionality breaks existing features.
 
 ## 7. Commit and push
 - Use meaningful commit messages.
