@@ -78,6 +78,20 @@ Hover over MITRE tags to get more info. You can set a keymap like so
 ```lua
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 ```
+
+## Document symbols
+You can get document symbols. Set a keymap like so 
+
+```lua
+vim.keymap.set('n', '<leader>DS', ':Telescope lsp_document_symbols<CR>', {noremap=true, silent=true})
+```
+
+Or just run this directly in command mode:
+
+```lua
+lua vim.lsp.buf.document_symbol()
+```
+
 ## Install in dev mode
 run
 
