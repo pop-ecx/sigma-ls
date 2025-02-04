@@ -19,3 +19,6 @@ Here are the supported features:
 
 ## Hover
 - Hover information is provided when a user hovers over MITRE tags
+
+## Document symbols
+- Document symbols is supported
