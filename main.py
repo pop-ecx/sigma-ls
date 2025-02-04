@@ -6,10 +6,12 @@ from lsprotocol.types import (DidChangeTextDocumentParams,
     TEXT_DOCUMENT_DID_OPEN,
     TEXT_DOCUMENT_DID_CHANGE,
     TEXT_DOCUMENT_CODE_ACTION,
+    TEXT_DOCUMENT_DOCUMENT_SYMBOL,
     Hover,
     HoverParams,
     DidOpenTextDocumentParams,
-    CodeActionParams
+    CodeActionParams,
+    DocumentSymbol
 )
 from lsp_server.server import SigmaLanguageServer
 from features.initialize import initialize
@@ -18,6 +20,8 @@ from features.completions import register_completion_feature
 from features.mitre_fetcher import search_mitre
 from features.hover import handle_hover
 from features.codeActions import provide_code_actions
+from features.document_symbols import parse_sigma_symbols
+from features.document_symbols import provide_document_symbols
 
 # Create the server instance
 server = SigmaLanguageServer()
@@ -61,6 +65,11 @@ def hover_feature(server: SigmaLanguageServer, params: HoverParams) -> Hover:
     Handle hover request
     """
     return handle_hover(server, params)
+
+@server.feature("textDocument/documentSymbol")
+def document_symbol(params):
+    """Provide document symbols for Sigma rules"""
+    return provide_document_symbols(server, params)
 
 register_completion_feature(server)
 
