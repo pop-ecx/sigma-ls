@@ -4,13 +4,12 @@ Document Symbols Feature
 from lsprotocol.types import DocumentSymbol, SymbolKind, Position, Range
 from ruamel.yaml import YAML
 
-yaml = YAML()  # Create ruamel.yaml instance
+yaml = YAML()
 
 def parse_sigma_symbols(content):
     """
     Parses a Sigma rule and extracts document symbols.
     """
-    print("Parsing Sigma Symbols...")  # Debugging line
     symbols = []
 
     try:
@@ -28,11 +27,11 @@ def parse_sigma_symbols(content):
             end_pos = Position(line=line_num, character=len(key))
 
             if isinstance(value, dict):
-                kind = SymbolKind.Module  # Represent nested dictionaries as modules
+                kind = SymbolKind.Module
             elif isinstance(value, list):
-                kind = SymbolKind.Array  # Lists are arrays
+                kind = SymbolKind.Array
             else:
-                kind = SymbolKind.Field  # Everything else is a field
+                kind = SymbolKind.Field
 
             symbol = DocumentSymbol(
                 name=key,
@@ -43,14 +42,12 @@ def parse_sigma_symbols(content):
             symbols.append(symbol)
 
     except Exception as parse_error:
-        print(f"YAML Parsing Error: {parse_error}")  # Debugging line
+        print(f"YAML Parsing Error: {parse_error}")
 
-    print(f"Symbols found: {symbols}")  # Debugging line
     return symbols
 
 def provide_document_symbols(server, params):
     """Provide document symbols for outline view."""
     uri = params.text_document.uri
     content = server.workspace.get_text_document(uri).source
-    print(f"Processing Document: {uri}")  # Debugging line
     return parse_sigma_symbols(content)
