@@ -14,7 +14,7 @@ No need to leave your beloved editor when writing sigma rules. You can get the c
 
 ## How it feels
 Real time diagnostics is provided as you write your sigma rules
-![diagnostics](sigma-ls.png)
+![diagnostics](sigma.gif)
 
 
 ## Installation instructions
