@@ -5,8 +5,6 @@ Handles initialization, document change, and diagnostic features.
 from lsprotocol.types import (DidChangeTextDocumentParams,
     TEXT_DOCUMENT_DID_OPEN,
     TEXT_DOCUMENT_DID_CHANGE,
-    TEXT_DOCUMENT_CODE_ACTION,
-    TEXT_DOCUMENT_DOCUMENT_SYMBOL,
     Hover,
     HoverParams,
     DidOpenTextDocumentParams,

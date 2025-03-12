@@ -47,8 +47,8 @@ def suggest_code_action(uri, diagnostics):
             line = diag.range.start.line
             text_edit = TextEdit(
                 range=Range(
-                    start=Position(line=line, character=0),
-                    end=Position(line=line, character=0)
+                    start=Position(line=line + 1, character=0),
+                    end=Position(line=line + 1, character=0)
                 ),
                 new_text=f"{missing_field}: \n"
             )
