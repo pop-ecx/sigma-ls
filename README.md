@@ -18,6 +18,12 @@ No need to leave your beloved editor when writing sigma rules. You can get the c
 Real time diagnostics is provided as you write your sigma rules
 ![diagnostics](sigma.gif)
 
+## supported features
+
+`textDocument/codeAction`
+`textDocument/formatting` (experimental)
+`textDocument/hover`
+`textDocument/documentSymbol`
 
 ## Installation instructions
 - Git clone the repo
