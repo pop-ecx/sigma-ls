@@ -21,8 +21,11 @@ Real time diagnostics is provided as you write your sigma rules
 ## supported features
 
 `textDocument/codeAction`
+
 `textDocument/formatting` (experimental)
+
 `textDocument/hover`
+
 `textDocument/documentSymbol`
 
 ## Installation instructions
