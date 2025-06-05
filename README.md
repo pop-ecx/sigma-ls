@@ -1,4 +1,5 @@
 [![License: Apache2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/apache-2-0) 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/pop-ecx/sigma-ls/ci.yml)
 
 ## Sigma Language Server
 
@@ -18,6 +19,15 @@ No need to leave your beloved editor when writing sigma rules. You can get the c
 Real time diagnostics is provided as you write your sigma rules
 ![diagnostics](sigma.gif)
 
+## supported features
+
+`textDocument/codeAction`
+
+`textDocument/formatting` (experimental)
+
+`textDocument/hover`
+
+`textDocument/documentSymbol`
 
 ## Installation instructions
 - Git clone the repo

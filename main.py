@@ -5,6 +5,7 @@ Handles initialization, document change, and diagnostic features.
 from lsprotocol.types import (DidChangeTextDocumentParams,
     TEXT_DOCUMENT_DID_OPEN,
     TEXT_DOCUMENT_DID_CHANGE,
+    TEXT_DOCUMENT_FORMATTING,
     Hover,
     HoverParams,
     DidOpenTextDocumentParams,
@@ -20,6 +21,7 @@ from features.hover import handle_hover
 from features.codeActions import provide_code_actions
 from features.document_symbols import parse_sigma_symbols
 from features.document_symbols import provide_document_symbols
+from features.formatter import format_document
 
 # Create the server instance
 server = SigmaLanguageServer()
@@ -68,6 +70,11 @@ def hover_feature(server: SigmaLanguageServer, params: HoverParams) -> Hover:
 def document_symbol(params):
     """Provide document symbols for Sigma rules"""
     return provide_document_symbols(server, params)
+
+@server.feature(TEXT_DOCUMENT_FORMATTING)
+def formatting_feature(params):
+    """Handle document formatting"""
+    return format_document(server, params)
 
 register_completion_feature(server)
 
