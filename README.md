@@ -1,5 +1,6 @@
 [![License: Apache2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/apache-2-0) 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/pop-ecx/sigma-ls/ci.yml)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/pop-ecx/sigma-ls)
 
 ## Sigma Language Server
 
